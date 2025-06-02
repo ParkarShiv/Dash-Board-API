@@ -1,0 +1,18 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+*.exe
+*.dll
+
+# VS files
+.vs/
+*.user
+*.suo
+
+# Publish folder
+publish/
+*.zip
+
+# Other
+*.log
+*.tmp
