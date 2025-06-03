@@ -5,7 +5,7 @@ using XHR.Services;
 
 namespace XHR.Controllers
 {
-    [Route("api/leaveRequest")]
+    [Route("api/[controller]")]
     [ApiController]
     public class LeaveRequestController : ControllerBase
     {

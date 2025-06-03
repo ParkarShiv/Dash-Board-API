@@ -93,7 +93,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UsePathBase("/api");
+
 
 
 app.UseForwardedHeaders();
