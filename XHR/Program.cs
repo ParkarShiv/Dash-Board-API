@@ -58,10 +58,11 @@ builder.Services.AddCors(options =>
     });
 });
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    serverOptions.ListenAnyIP(int.Parse(Environment.GetEnvironmentVariable("PORT") ?? "3000"));
+    serverOptions.ListenAnyIP(int.Parse(port));
 });
 
 
@@ -88,14 +89,13 @@ app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.UsePathBase("/api");
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
-app.Urls.Add($"http://0.0.0.0:{port}");
+
 app.UseForwardedHeaders();
 
 
