@@ -8,9 +8,15 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+try
+{
 
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+}catch(Exception e)
+{
+    Console.WriteLine($"Database Connection Error: {e.Message}");
+}
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<EmployeeService>();
@@ -21,17 +27,12 @@ builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 
 
 
-try
-{
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Database Connection Error: {ex.Message}");
-}
 
-
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
 .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
