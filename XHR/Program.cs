@@ -8,15 +8,8 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-try
-{
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Database Connection Error: {ex.Message}");
-}
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 builder.Services.AddScoped<AuthService>();
@@ -28,12 +21,17 @@ builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 
 
 
-
-builder.Services.AddAuthentication(options =>
+try
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Database Connection Error: {ex.Message}");
+}
+
+
 .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -89,8 +87,8 @@ app.UseAuthorization();
 
 app.UsePathBase("/api");
 
-//var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
-//app.Urls.Add($"http://0.0.0.0:{port}");
+var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
+app.Urls.Add($"http://0.0.0.0:{port}");
 
 app.MapControllers();
 
