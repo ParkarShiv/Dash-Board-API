@@ -8,8 +8,15 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+try
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Database Connection Error: {ex.Message}");
+}
 
 
 builder.Services.AddScoped<AuthService>();
@@ -82,8 +89,8 @@ app.UseAuthorization();
 
 app.UsePathBase("/api");
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
-app.Urls.Add($"http://0.0.0.0:{port}");
+//var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
+//app.Urls.Add($"http://0.0.0.0:{port}");
 
 app.MapControllers();
 
