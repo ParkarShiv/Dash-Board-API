@@ -59,6 +59,12 @@ builder.Services.AddCors(options =>
 });
 
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(int.Parse(Environment.GetEnvironmentVariable("PORT") ?? "3000"));
+});
+
+
 
 
 builder.Services.AddControllers().AddJsonOptions(x =>
