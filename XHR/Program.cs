@@ -90,6 +90,8 @@ app.UsePathBase("/api");
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
 app.Urls.Add($"http://0.0.0.0:{port}");
+app.UseForwardedHeaders();
+
 
 app.MapControllers();
 

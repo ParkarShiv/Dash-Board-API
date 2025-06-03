@@ -16,7 +16,16 @@ namespace XHR.Services
        
         public async Task<List<Employee>> GetEmployeesAsync()
         {
-            return await _context.Employees.ToListAsync();
+            try
+            {
+                Console.WriteLine("Fetching employees...");
+                return await _context.Employees.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetEmployeesAsync: {ex.Message}");
+                return new List<Employee>();
+            }
         }
 
         
