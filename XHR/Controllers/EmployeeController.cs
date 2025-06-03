@@ -6,7 +6,7 @@ using XHR.Services;
 namespace XHR.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/employees")]
     [EnableCors("AllowFrontend")]
     public class EmployeeController : ControllerBase
     {

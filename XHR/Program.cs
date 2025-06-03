@@ -80,6 +80,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UsePathBase("/api");
+
 app.MapControllers();
 
 app.Run();

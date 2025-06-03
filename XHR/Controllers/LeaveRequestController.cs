@@ -5,7 +5,7 @@ using XHR.Services;
 
 namespace XHR.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/leaveRequest")]
     [ApiController]
     public class LeaveRequestController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace XHR.Controllers
             return Ok(requests);
         }
 
-        // ✅ DELETE: api/LeaveRequest/{id}
+      
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLeaveRequest(int id)
         {
@@ -56,7 +56,7 @@ namespace XHR.Controllers
         }
 
 
-        // PUT: api/LeaveRequest/Approve/{id}
+       
         [HttpPut("Approve/{id}")]
         public async Task<IActionResult> ApproveLeaveRequest(int id)
         {
@@ -64,7 +64,6 @@ namespace XHR.Controllers
             return Ok(new { message = "Leave request approved!" });
         }
 
-        // PUT: api/LeaveRequest/Reject/{id}
         [HttpPut("Reject/{id}")]
         public async Task<IActionResult> RejectLeaveRequest(int id)
         {

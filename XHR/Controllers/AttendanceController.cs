@@ -5,7 +5,7 @@ using XHR.Services;
 
 namespace XHR.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/attendance")]
     [ApiController]
     public class AttendanceController : ControllerBase
     {

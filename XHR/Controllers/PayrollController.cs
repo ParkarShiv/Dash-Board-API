@@ -7,7 +7,7 @@ using XHR.Services;
 namespace XHR.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/payroll")]
     public class PayrollController : ControllerBase
     {
         private readonly IPayrollService _service;
